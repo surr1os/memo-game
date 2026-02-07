@@ -1,0 +1,344 @@
+.game-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 2.5em;
+}
+
+/* Уведомление */
+.notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 30px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+  color: white;
+  font-weight: bold;
+  z-index: 1000;
+  animation: slideDown 0.3s ease, fadeOut 0.3s ease 1.7s forwards;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+  &.success {
+    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+  }
+
+  &.error {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+  }
+}
+
+.notification.success {
+  background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notification-icon {
+  font-size: 1.2em;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translate(-50%, -100%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  border-radius: 15px;
+  color: white;
+}
+
+.players-info {
+  display: flex;
+  gap: 40px;
+}
+
+.player {
+  padding: 15px 25px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  min-width: 180px;
+}
+
+.player.current {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.player-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.player-number {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.turn-indicator {
+  font-size: 0.9em;
+  color: #ffeb3b;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.player-basket {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.basket-icon {
+  font-size: 2em;
+}
+
+.score {
+  font-size: 2.5em;
+  font-weight: bold;
+  min-width: 50px;
+}
+
+.player-label {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+.reset-btn {
+  padding: 12px 25px;
+  background: #ff4081;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #f50057;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Карточки */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 30px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+}
+
+.card {
+  aspect-ratio: 2/3;
+  perspective: 1000px;
+  cursor: pointer;
+
+  &:hover .card-front {
+    transform: translateY(-5px);
+  }
+
+  &.clickable:hover .card-front {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Более плавная анимация */
+  transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-front {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-back {
+  background: white;
+  transform: rotateY(180deg); /* Важно: изначально повернута на 180 градусов */
+  border: 3px solid #667eea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.card-content {
+  font-size: 3em;
+  color: white;
+  font-weight: bold;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 7px;
+}
+
+.card.matched {
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+/* Конец игры */
+.game-over {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  padding: 30px;
+  border-radius: 15px;
+  color: white;
+  margin-bottom: 30px;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.game-over h2 {
+  margin-top: 0;
+  font-size: 2.5em;
+}
+
+.game-over h3 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+
+.final-scores {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 20px 0;
+  font-size: 1.2em;
+}
+
+.final-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.score-label {
+  opacity: 0.9;
+}
+
+.score-value {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.play-again-btn {
+  padding: 15px 40px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+
+  &:hover {
+    background: #388e3c;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Инструкции */
+.instructions {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+
+  h3 {
+    color: #333;
+    margin-top: 0;
+    font-size: 1.3em;
+  }
+
+  ul {
+    color: #666;
+    line-height: 1.6;
+    padding-left: 20px;
+  }
+
+  li {
+    margin-bottom: 8px;
+  }
+}
+
+
