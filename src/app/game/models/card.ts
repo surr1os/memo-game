@@ -22,4 +22,8 @@ export interface Card {
    * Идентификатор пары.
    */
   pairId: number;
+  /**
+   * Наименование картинки
+   */
+  name: string;
 }

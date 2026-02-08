@@ -46,24 +46,24 @@ export class Game implements OnInit {
   );
 
   cardImages = [
-    '/assets/image1.png',
-    '/assets/image2.png',
-    '/assets/image3.jpeg',
-    '/assets/image4.png',
-    '/assets/image5.png',
-    '/assets/image6.png',
-    '/assets/image7.png',
-    '/assets/image8.png',
-    '/assets/image9.png',
-    '/assets/image10.png',
-    '/assets/image11.png',
-    '/assets/image12.png',
-    '/assets/image13.png',
-    '/assets/image14.png',
-    '/assets/image15.png',
-    '/assets/image16.png',
-    '/assets/image17.png',
-    '/assets/image18.png',
+    { image: '/assets/image1.png', name: 'БОЛОТНЫЙ МОХ СФАГНУМ' },
+    { image: '/assets/image2.png', name: 'ОСОКА' },
+    { image: '/assets/image3.jpeg', name: 'ПУШИЦА' },
+    { image: '/assets/image4.png', name: 'КЛЮКВА' },
+    { image: '/assets/image5.png', name: 'СОСНА' },
+    { image: '/assets/image6.png', name: 'БЕРЕЗА' },
+    { image: '/assets/image7.png', name: 'БАГУЛЬНИК' },
+    { image: '/assets/image8.png', name: 'ВЕРЕСК ОБЫКНОВЕННЫЙ' },
+    { image: '/assets/image9.png', name: 'ЛАДЬЯН (ПЕТРОВ КРЕСТ)' },
+    { image: '/assets/image10.png', name: 'ИРИС СИБИРСКИЙ' },
+    { image: '/assets/image11.png', name: 'ДРЕМЛИК БОЛОТНЫЙ' },
+    { image: '/assets/image12.png', name: 'САБЕЛЬНИК БОЛОТНЫЙ' },
+    { image: '/assets/image13.png', name: 'ЛЯГУШКА СИБИРСКАЯ' },
+    { image: '/assets/image14.png', name: 'МОХОВЫЙ ШМЕЛЬ' },
+    { image: '/assets/image15.png', name: 'ЖУЖЕЛИЦА РЕБРИСТАЯ' },
+    { image: '/assets/image16.png', name: 'БОЛЬШОЙ ПОДОРЛИК' },
+    { image: '/assets/image17.png', name: 'БОЛОТНЫЙ ЛУНЬ' },
+    { image: '/assets/image18.png', name: 'ОНДАТРА' },
   ];
 
   ngOnInit() {
@@ -80,16 +80,18 @@ export class Game implements OnInit {
     this.canClick.set(true);
     this.isProcessingMatch.set(false);
 
-    const pairs: { image: string, pairId: number }[] = [];
+    const pairs: { image: string, name: string, pairId: number }[] = [];
 
-    this.cardImages.forEach((image, index) => {
-      pairs.push({ image, pairId: index });
-      pairs.push({ image, pairId: index });
+    // Исправлено: теперь передаем и image и name
+    this.cardImages.forEach((cardData, index) => {
+      pairs.push({ image: cardData.image, name: cardData.name, pairId: index });
+      pairs.push({ image: cardData.image, name: cardData.name, pairId: index });
     });
 
     const newCards = pairs.map((pair, index) => ({
       id: index,
       image: pair.image,
+      name: pair.name, // Добавлено имя
       isFlipped: false,
       isMatched: false,
       pairId: pair.pairId

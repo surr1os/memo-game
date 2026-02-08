@@ -216,10 +216,8 @@ h1 {
   background: white;
   transform: rotateY(180deg);
   border: 2px solid #667eea;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px;
+  position: relative; /* Добавлено */
+  display: block; /* Изменено с flex на block */
 }
 
 .card-content {
@@ -230,9 +228,9 @@ h1 {
 
 .card-image {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 50px); /* Оставляем место для названия */
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 6px 6px 0 0; /* Закругляем только верхние углы */
 }
 
 .card.matched {
@@ -241,6 +239,33 @@ h1 {
   transition: all 0.5s ease;
   pointer-events: none;
 }
+
+.card-name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 40px;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 6px 4px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  line-height: 1.2;
+  word-break: break-word; /* Разрыв слов при необходимости */
+  hyphens: auto; /* Автоматические переносы (работает не во всех браузерах) */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* До 3 строк */
+  -webkit-box-orient: vertical;
+}
+
 
 /* Конец игры */
 .game-over {
@@ -374,6 +399,12 @@ h1 {
     padding: 20px;
   }
 
+  .card-name {
+    font-size: 15px;
+    height: 44px;
+    padding: 10px 6px;
+  }
+
   h1 {
     font-size: 2em;
   }
@@ -449,6 +480,11 @@ h1 {
     gap: 10px;
   }
 
+  .card-name {
+    font-size: 14px;
+    height: 42px;
+  }
+
   .card-content {
     font-size: 2.5em;
   }
@@ -472,6 +508,12 @@ h1 {
     gap: 15px;
   }
 
+  .card-name {
+    font-size: 15px;
+    height: 46px;
+    padding: 12px 8px;
+  }
+
   .game-container {
     padding: 30px;
   }
@@ -490,6 +532,12 @@ h1 {
 @media (max-height: 600px) and (orientation: landscape) {
   .game-container {
     padding: 10px;
+  }
+
+  .card-name {
+    font-size: 11px;
+    height: 32px;
+    padding: 4px 6px;
   }
 
   .cards-grid {
