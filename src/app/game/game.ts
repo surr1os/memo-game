@@ -46,9 +46,24 @@ export class Game implements OnInit {
   );
 
   cardImages = [
-    '/assets/image1.jpg',
-    '/assets/image2.jpg',
-    '/assets/image3.jpg'
+    '/assets/image1.png',
+    '/assets/image2.png',
+    '/assets/image3.jpeg',
+    '/assets/image4.png',
+    '/assets/image5.png',
+    '/assets/image6.png',
+    '/assets/image7.png',
+    '/assets/image8.png',
+    '/assets/image9.png',
+    '/assets/image10.png',
+    '/assets/image11.png',
+    '/assets/image12.png',
+    '/assets/image13.png',
+    '/assets/image14.png',
+    '/assets/image15.png',
+    '/assets/image16.png',
+    '/assets/image17.png',
+    '/assets/image18.png',
   ];
 
   ngOnInit() {
